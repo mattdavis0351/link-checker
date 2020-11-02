@@ -1,0 +1,4 @@
+{
+  "image": "mcr.microsoft.com/vscode/devcontainers/go",
+  "args": { "VARIANT": "1.14", "INSTALL_NODE": "false" }
+}
