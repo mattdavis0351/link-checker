@@ -1,4 +1,5 @@
 {
   "image": "mcr.microsoft.com/vscode/devcontainers/go",
-  "args": { "VARIANT": "1.14", "INSTALL_NODE": "false" }
+  "args": { "VARIANT": "1.14", "INSTALL_NODE": "false" },
+  "postCreateCommand": "go mod download"
 }
