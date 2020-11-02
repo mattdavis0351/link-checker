@@ -1,0 +1,6 @@
+FROM golang:1.15
+WORKDIR /go/src/link-checker
+COPY . .
+RUN go get -d -v ./...
+RUN go install -v ./...
+CMD ["link-checker"]

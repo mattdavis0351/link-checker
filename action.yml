@@ -1,0 +1,13 @@
+# action.yml
+name: 'Link Checker'
+author: 'mattdavis0351'
+description: 'Parses repository files for link and validates their state'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+
+branding:
+    icon: 'activity'
+    color: 'green'
