@@ -9,5 +9,5 @@ runs:
 
 
 branding:
-    icon: 'activity',
+    icon: 'activity'
     color: 'green'
