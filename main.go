@@ -3,10 +3,9 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
-	"regexp"
 	"net/http"
+	"regexp"
 )
-
 
 // /([\w+]+\:\/\/)?([\w\d-]+\.)*[\w-]+[\.\:]\w+([\/\?\=\&\#]?[\w-]+)*\/?/gm
 
@@ -17,33 +16,43 @@ import (
 // 		status 200 -> link is valid... count it as a link in the repo
 // 		status !200 > link is not valid, count it, report as broken
 // Write results to an issue on GitHub
-var good, bad []bytes
-func main(){
-	
-	f, err := ioutil.ReadFile("test-txt-file.txt")
-	if err != nil{
+var good, bad []string
+
+func parseFileForLinks(f string) [][]byte {
+	content, err := ioutil.ReadFile(f)
+	if err != nil {
 		fmt.Println("something went terribly wrong")
 	}
-	// string from []byte of test-txt-file.txt
-	// s := string(f)
-
 	re := regexp.MustCompile(`([\w+]+\:\/\/)?([\w\d-]+\.)*[\w-]+[\.\:]\w+([\/\?\=\&\#]?[\w-]+)*\/?`)
-	u := re.FindAll([]byte(f), -1)
+	u := re.FindAll(content, -1)
+	return u
+}
 
-	for _, v := range u{
-		resp, err := http.Get(string(v))
-		defer resp.Body.Close()
+func main() {
+
+	urls := parseFileForLinks("test-txt-file.txt")
+
+	for _, v := range urls {
+		sv := string(v)
+		resp, err := http.Get(sv)
+
 		// http status code do not count as err
-		if err != nil{
+		if err != nil {
 			fmt.Println(err)
 		}
+		defer resp.Body.Close()
 
-		if resp.StatusCode != 200{
-			fmt.Printf("Not 200, got: %d", resp.StatusCode)
+		if resp.StatusCode != 200 {
+			// fmt.Printf("Not 200, got: %d", resp.StatusCode)
+			bad = append(bad, sv)
+		} else {
+			good = append(good, sv)
 		}
 		// fmt.Printf("%s\n",v)
-		fmt.Println(resp.StatusCode)
+
 	}
 	// fmt.Println(s)
+	fmt.Println(good)
+	fmt.Println(bad)
 
 }
