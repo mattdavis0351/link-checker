@@ -15,7 +15,6 @@ import (
 // 		status 200 -> link is valid... count it as a link in the repo
 // 		status !200 > link is not valid, count it, report as broken
 // Set the resulting output as environment variable using actions workflow commands
-var good, bad []string
 
 func main() {
 
