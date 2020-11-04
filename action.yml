@@ -7,7 +7,6 @@ inputs:
   ignored_extensions:
     description: A list of file extensions to ignore for link parsing
     required: false
-    default: ""
 
   included_Extensions:
     description: A space separated list of file extensions to include for link parsing
