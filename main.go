@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
-	"log"
 	"os"
+
+	"github.com/mattdavis0351/link-checker/files"
 )
 
 // /([\w+]+\:\/\/)?([\w\d-]+\.)*[\w-]+[\.\:]\w+([\/\?\=\&\#]?[\w-]+)*\/?/gm
@@ -20,14 +20,7 @@ var ws string = os.Getenv("GITHUB_WORKSPACE")
 
 func main() {
 
-	files, err := ioutil.ReadDir(ws)
-	if err != nil {
-		log.Fatal(err)
-	}
-	for _, file := range files {
-
-		fmt.Println(file.Name())
-
-	}
+	fn := files.ReadWorkspaceDir()
+	fmt.Println(fn)
 
 }
