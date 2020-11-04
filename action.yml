@@ -12,6 +12,7 @@ inputs:
   included_Extensions:
     description: A space separated list of file extensions to include for link parsing
     required: false
+    default: ""
 
 runs:
   using: "docker"
