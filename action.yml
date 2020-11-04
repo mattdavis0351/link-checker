@@ -1,13 +1,21 @@
 # action.yml
-name: 'Link Checker'
-author: 'mattdavis0351'
-description: 'Parses repository files for link and validates their state'
+name: "Link Checker"
+author: "mattdavis0351"
+description: "Parses repository files for link and validates their state"
+
+inputs:
+  ignored_extensions:
+    description: A list of file extensions to ignore for link parsing
+    required: false
+
+  included_Extensions:
+    description: A space separated list of file extensions to include for link parsing
+    required: false
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-
+  using: "docker"
+  image: "Dockerfile"
 
 branding:
-    icon: 'activity'
-    color: 'green'
+  icon: "activity"
+  color: "green"
