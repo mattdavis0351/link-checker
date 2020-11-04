@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
+	"os"
 
-	"github.com/mattdavis0351/link-checker/links"
+	"github.com/mattdavis0351/link-checker/files"
 )
 
 // /([\w+]+\:\/\/)?([\w\d-]+\.)*[\w-]+[\.\:]\w+([\/\?\=\&\#]?[\w-]+)*\/?/gm
@@ -15,13 +16,11 @@ import (
 // 		status 200 -> link is valid... count it as a link in the repo
 // 		status !200 > link is not valid, count it, report as broken
 // Set the resulting output as environment variable using actions workflow commands
+var ws string = os.Getenv("GITHUB_WORKSPACE")
 
 func main() {
 
-	urls := links.ParseFile("test-txt-file.txt")
-
-	allLinks := links.Links(urls)
-
-	fmt.Println(allLinks)
+	fn := files.ReadWorkspaceDir()
+	fmt.Println(fn)
 
 }
