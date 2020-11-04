@@ -23,8 +23,8 @@ var ignoreExtenstions string = actions.GetInput("ignored_extensions")
 var includeExtenstions string = actions.GetInput("included_extensions")
 
 func main() {
-	ie := strings.Split(ignoreExtenstions, " ")
-	iex := strings.Split(includeExtenstions, " ")
+	ie := strings.Split(ignoreExtenstions, ",")
+	iex := strings.Split(includeExtenstions, ",")
 	fn := files.ReadWorkspaceDir()
 	fmt.Println(fn)
 	fmt.Printf("ignored extensions are:\n%s", ignoreExtenstions)
