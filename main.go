@@ -27,7 +27,7 @@ func main() {
 	iex := strings.Split(includeExtenstions, ",")
 	fn := files.ReadWorkspaceDir()
 	fmt.Println(fn)
-	fmt.Printf("ignored extensions are:\n%s", ignoreExtenstions)
+	fmt.Printf("ignored extensions are:\n%s", ie)
 	fmt.Printf("length of ignore extensions slice: %d\n", len(ie))
 	fmt.Printf("length of included extensions slice: %d\n", len(iex))
 
