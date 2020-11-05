@@ -22,6 +22,7 @@ func main() {
 	var l []links.Link
 	fn := files.ReadWorkspaceDir()
 	for _, f := range fn {
+		fmt.Printf("checking links in %s", f)
 		u = links.ParseFile(f)
 		l = links.Links(f, u)
 	}
