@@ -62,7 +62,7 @@ func ReadWorkspaceDir() []string {
 			// filesToParse = append(filesToParse, path)
 			for _, i := range inc {
 				for _, e := range ign {
-					if !info.IsDir() && (strings.Contains(info.Name(), i) && !strings.Contains(info.Name(), e)) {
+					if !info.IsDir() && (strings.Contains(info.Name(), i) || !strings.Contains(info.Name(), e)) {
 						filesToParse = append(filesToParse, path)
 					}
 				}
