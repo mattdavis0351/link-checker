@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/mattdavis0351/link-checker/files"
+	"github.com/mattdavis0351/link-checker/links"
 )
 
 // /([\w+]+\:\/\/)?([\w\d-]+\.)*[\w-]+[\.\:]\w+([\/\?\=\&\#]?[\w-]+)*\/?/gm
@@ -17,8 +18,13 @@ import (
 // Set the resulting output as environment variable using actions workflow commands
 
 func main() {
-
+	var u [][]byte
+	var l []links.Link
 	fn := files.ReadWorkspaceDir()
-	fmt.Println(fn)
+	for _, f := range fn {
+		u = links.ParseFile(f)
+		l = links.Links(f, u)
+	}
 
+	fmt.Println(l)
 }

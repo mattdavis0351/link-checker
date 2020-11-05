@@ -11,12 +11,12 @@ type Link struct {
 	StatusCode int
 }
 
-func Links(u [][]byte) []Link {
+func Links(n string, u [][]byte) []Link {
 	var a []Link
 	for _, v := range u {
 		l := Link{
 			URL:      string(v),
-			FileName: "test-txt-file.txt",
+			FileName: n,
 		}
 
 		resp, err := http.Get(l.URL)
