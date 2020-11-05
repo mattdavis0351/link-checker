@@ -51,6 +51,7 @@ func ReadWorkspaceDir() []string {
 	var filesToParse []string
 	ign := strings.Split(ignoreExtenstions, ",")
 	inc := strings.Split(includeExtenstions, ",")
+
 	err := filepath.Walk(githubWorkspace,
 		func(path string, info os.FileInfo, err error) error {
 			if err != nil {
@@ -60,11 +61,23 @@ func ReadWorkspaceDir() []string {
 				return filepath.SkipDir
 			}
 			// filesToParse = append(filesToParse, path)
+			// for _, i := range inc {
+			// 	for _, e := range ign {
+			// 		if !info.IsDir() && (strings.Contains(info.Name(), i) || !strings.Contains(info.Name(), e)) {
+			// 			filesToParse = append(filesToParse, path)
+			// 		}
+			// 	}
+			// }
 			for _, i := range inc {
-				for _, e := range ign {
-					if !info.IsDir() && (strings.Contains(info.Name(), i) || !strings.Contains(info.Name(), e)) {
-						filesToParse = append(filesToParse, path)
-					}
+				if !info.IsDir() && strings.Contains(info.Name(), i) {
+					filesToParse = append(filesToParse, path)
+					return nil
+				}
+			}
+
+			for _, e := range ign {
+				if !info.IsDir() && !strings.Contains(info.Name(), e) {
+					filesToParse = append(filesToParse, path)
 				}
 			}
 
