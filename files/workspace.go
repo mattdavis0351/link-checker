@@ -51,7 +51,7 @@ func ReadWorkspaceDir() []string {
 	var filesToParse []string
 	// ign := strings.Split(ignoreExtenstions, ",")
 	// inc := strings.Split(includeExtenstions, ",")
-	err := filepath.Walk(os.Getenv(githubWorkspace),
+	err := filepath.Walk(githubWorkspace,
 		func(path string, info os.FileInfo, err error) error {
 			if err != nil {
 				log.Println(err)
