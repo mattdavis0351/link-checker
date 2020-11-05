@@ -24,7 +24,10 @@ func main() {
 	for _, f := range fn {
 		fmt.Printf("checking links in %s", f)
 		u = links.ParseFile(f)
-		l = links.Links(f, u)
+		ll := links.Links(f, u)
+		for _, li := range ll {
+			l = append(l, li)
+		}
 	}
 
 	fmt.Println(l)
