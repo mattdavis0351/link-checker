@@ -11,7 +11,7 @@ func ParseFile(f string) [][]byte {
 	if err != nil {
 		fmt.Println("something went terribly wrong")
 	}
-	re := regexp.MustCompile(`([\w+]+\:\/\/)?([\w\d-]+\.)*[\w-]+[\.\:]\w+([\/\?\=\&\#]?[\w-]+)*\/?`)
+	re := regexp.MustCompile(`((http|https)+\:\/\/)([\w\d-]+\.)*[\w-]+[\.\:]\w+([\/\?\=\&\#]?[\w-]+)*\/?`)
 	u := re.FindAll(content, -1)
 	return u
 }
