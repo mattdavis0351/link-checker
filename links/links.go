@@ -35,7 +35,6 @@ func urlsAsList(n string, u [][]byte) []Link {
 func AsListOfObjects(fileNames []string) []Link {
 	var l []Link
 	for _, file := range fileNames {
-		fmt.Printf("checking links in %s", file)
 		foundURLs := ParseFile(file)
 		linkList := urlsAsList(file, foundURLs)
 		for _, linkItem := range linkList {
