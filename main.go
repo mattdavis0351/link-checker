@@ -18,17 +18,17 @@ import (
 // Set the resulting output as environment variable using actions workflow commands
 
 func main() {
-	// var u [][]byte
-	var l []links.Link
+	// var l []links.Link
 	fn := files.ReadWorkspaceDir()
-	for _, f := range fn {
-		fmt.Printf("checking links in %s", f)
-		u := links.ParseFile(f)
-		ll := links.Links(f, u)
-		for _, li := range ll {
-			l = append(l, li)
-		}
-	}
+	// for _, f := range fn {
+	// 	fmt.Printf("checking links in %s", f)
+	// 	u := links.ParseFile(f)
+	// 	ll := links.ListLinks(f, u)
+	// 	for _, li := range ll {
+	// 		l = append(l, li)
+	// 	}
+	// }
+	lo := links.AsObjects(fn)
 
-	fmt.Println(l)
+	fmt.Println(lo)
 }
