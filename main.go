@@ -21,7 +21,8 @@ import (
 func main() {
 	fn := files.ReadWorkspaceDir()
 	lo := links.AsListOfObjects(fn)
-	err := actions.SetOutput()
+	o := "[{some:super long}, {kinda:complex, string: of things}]"
+	err := actions.SetOutput(o)
 	if err != nil {
 		fmt.Println(err)
 	}
