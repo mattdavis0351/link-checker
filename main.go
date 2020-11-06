@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/mattdavis0351/link-checker/actions"
@@ -21,8 +22,13 @@ import (
 func main() {
 	fn := files.ReadWorkspaceDir()
 	lo := links.AsListOfObjects(fn)
-	o := "[{some:super long}, {kinda:complex, string: of things}]"
-	err := actions.SetOutput(o)
+	// o := "[{some:super long}, {kinda:complex, string: of things}]"
+
+	j, err := json.Marshal(lo)
+	if err != nil {
+		fmt.Println(err)
+	}
+	err = actions.SetOutput(string(j))
 	if err != nil {
 		fmt.Println(err)
 	}
