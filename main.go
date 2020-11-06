@@ -21,17 +21,20 @@ import (
 
 func main() {
 	fn := files.ReadWorkspaceDir()
+	fmt.Printf("the following files will be parsed:\n%s\n", fn)
 	lo := links.AsListOfObjects(fn)
+	fmt.Printf("the following objects have been created from the files to parse:\n%v\n", lo)
 	// o := "[{some:super long}, {kinda:complex, string: of things}]"
 
 	j, err := json.Marshal(lo)
 	if err != nil {
 		fmt.Println(err)
 	}
+	fmt.Printf("json data after marshalling:\n%s\n", string(j))
 	err = actions.SetOutput(string(j))
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	fmt.Println(lo)
+	// fmt.Println(lo)
 }
