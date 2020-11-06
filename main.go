@@ -21,7 +21,10 @@ import (
 func main() {
 	fn := files.ReadWorkspaceDir()
 	lo := links.AsListOfObjects(fn)
-	actions.SetOutput()
+	err := actions.SetOutput()
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	fmt.Println(lo)
 }
