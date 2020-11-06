@@ -11,7 +11,7 @@ type Link struct {
 	StatusCode int
 }
 
-func asList(n string, u [][]byte) []Link {
+func urlsAsList(n string, u [][]byte) []Link {
 	var a []Link
 	for _, v := range u {
 		l := Link{
@@ -32,12 +32,12 @@ func asList(n string, u [][]byte) []Link {
 	return a
 }
 
-func AsObjects(fileNames []string) []Link {
+func AsListOfObjects(fileNames []string) []Link {
 	var l []Link
 	for _, file := range fileNames {
 		fmt.Printf("checking links in %s", file)
 		foundURLs := ParseFile(file)
-		linkList := asList(file, foundURLs)
+		linkList := urlsAsList(file, foundURLs)
 		for _, linkItem := range linkList {
 			l = append(l, linkItem)
 		}

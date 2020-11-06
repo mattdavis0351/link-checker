@@ -13,6 +13,10 @@ inputs:
     required: false
     default: ""
 
+outputs:
+  link_objects:
+    description: a list of objects containing data on the links present in the files parsed
+
 runs:
   using: "docker"
   image: "Dockerfile"
