@@ -18,23 +18,23 @@ import (
 // 		status 200 -> link is valid... count it as a link in the repo
 // 		status !200 > link is not valid, count it, report as broken
 // Set the resulting output as environment variable using actions workflow commands
+type urls struct {
+	URLs []links.Link `json:"urls"`
+}
 
 func main() {
 	fn := files.ReadWorkspaceDir()
-	fmt.Printf("the following files will be parsed:\n%s\n", fn)
 	lo := links.AsListOfObjects(fn)
-	fmt.Printf("the following objects have been created from the files to parse:\n%v\n", lo)
-	// o := "[{some:super long}, {kinda:complex, string: of things}]"
 
-	j, err := json.Marshal(lo)
+	u := urls{lo}
+
+	j, err := json.Marshal(u)
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Printf("json data after marshalling:\n%s\n", string(j))
+
 	err = actions.SetOutput(string(j))
 	if err != nil {
 		fmt.Println(err)
 	}
-
-	// fmt.Println(lo)
 }

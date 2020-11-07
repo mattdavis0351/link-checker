@@ -9,7 +9,7 @@ import (
 func ParseFile(f string) [][]byte {
 	content, err := ioutil.ReadFile(f)
 	if err != nil {
-		fmt.Println("something went terribly wrong")
+		fmt.Println(err)
 	}
 	re := regexp.MustCompile(`((http|https)+\:\/\/)([\w\d-]+\.)*[\w-]+[\.\:]\w+([\/\?\=\&\#]?[\w-]+)*\/?`)
 	u := re.FindAll(content, -1)

@@ -8,7 +8,7 @@ import (
 type Link struct {
 	URL        string `json:"url"`
 	FileName   string `json:"file_name"`
-	StatusCode int    `json:"status_code`
+	StatusCode int    `json:"status_code"`
 }
 
 func urlsAsList(n string, u [][]byte) []Link {
