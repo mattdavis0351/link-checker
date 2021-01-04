@@ -1,10 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
-	"os"
 
+	"github.com/mattdavis0351/link-checker/actions"
 	"github.com/mattdavis0351/link-checker/files"
+	"github.com/mattdavis0351/link-checker/links"
 )
 
 // /([\w+]+\:\/\/)?([\w\d-]+\.)*[\w-]+[\.\:]\w+([\/\?\=\&\#]?[\w-]+)*\/?/gm
@@ -16,11 +18,23 @@ import (
 // 		status 200 -> link is valid... count it as a link in the repo
 // 		status !200 > link is not valid, count it, report as broken
 // Set the resulting output as environment variable using actions workflow commands
-var ws string = os.Getenv("GITHUB_WORKSPACE")
+type urls struct {
+	URLs []links.Link `json:"urls"`
+}
 
 func main() {
-
 	fn := files.ReadWorkspaceDir()
-	fmt.Println(fn)
+	lo := links.AsListOfObjects(fn)
 
+	u := urls{lo}
+
+	j, err := json.Marshal(u)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	err = actions.SetOutput(string(j))
+	if err != nil {
+		fmt.Println(err)
+	}
 }

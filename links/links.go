@@ -6,17 +6,17 @@ import (
 )
 
 type Link struct {
-	URL        string
-	FileName   string
-	StatusCode int
+	URL        string `json:"url"`
+	FileName   string `json:"file_name"`
+	StatusCode int    `json:"status_code"`
 }
 
-func Links(u [][]byte) []Link {
+func urlsAsList(n string, u [][]byte) []Link {
 	var a []Link
 	for _, v := range u {
 		l := Link{
 			URL:      string(v),
-			FileName: "test-txt-file.txt",
+			FileName: n,
 		}
 
 		resp, err := http.Get(l.URL)
@@ -30,4 +30,16 @@ func Links(u [][]byte) []Link {
 
 	}
 	return a
+}
+
+func AsListOfObjects(fileNames []string) []Link {
+	var l []Link
+	for _, file := range fileNames {
+		foundURLs := ParseFile(file)
+		linkList := urlsAsList(file, foundURLs)
+		for _, linkItem := range linkList {
+			l = append(l, linkItem)
+		}
+	}
+	return l
 }

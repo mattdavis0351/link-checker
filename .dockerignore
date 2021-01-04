@@ -1,0 +1,12 @@
+# Ignore these folders
+.devcontainer
+.git
+.github
+
+# Ignore these files
+*.md
+.gitignore
+.dockerignore
+Dockerfile
+LICENSE
+
